@@ -160,6 +160,11 @@
                             <li><span class="highlight">LLM (Large Language Model):</span> Çok büyük miktarda metin verisiyle eğitilmiş dil modelidir.</li>
                             <li>10 milyonlarca parametreli yapılar (GPT-4: ~1.8 trilyon parametre)</li>
                             <li>İnsan dilindeki kalıpları öğrenerek yanıt verir.</li>
+                            <li>Trillions (trilyonlarca) kelime üzerinde eğitilir (Common Crawl, Wikipedia, kitaplar).</li>
+                            <li>Kelimeler arası ilişkileri istatistiksel olarak öğrenir.</li>
+                            <li>İçerik üretme, özetleme, kod yazma ve çevirmenlik gibi görevler yapabilir.</li>
+                            <li>Sürekli geliştirme ve veri artışıyla giderek daha yetenekli hale gelir.</li>
+                            <li>Metin dışında resim, ses ve video gibi multimodal verilerle de çalışabilen versiyonları vardır.</li>
                         </ul>
                     </div>
                     <div class="card flex flex-col">
@@ -168,6 +173,12 @@
                             <li><span class="highlight">Kullanılan teknikler:</span> Transformer, attention mekanizması, tokenizasyon</li>
                             <li><span class="highlight">Hallucination</span> problemi: Model, gerçeğe dayanmayan yanıtlar üretebilir.</li>
                             <li>❗ LLM'ler "anlamaz", sadece istatistiksel tahmin yapar.</li>
+                            <li>Tokenizasyon: Metinler kelime veya harf gruplarına (token) dönüştürülür.</li>
+                            <li>Self-attention: Model içeriğin hangi kısımlarının daha önemli olduğunu öğrenir.</li>
+                            <li>Context window: Modelin tek seferde işleyebildiği token miktarı (GPT-4: 128K token).</li>
+                            <li>Fine-tuning: Genel modelin belirli görevler için özelleştirilmesi.</li>
+                            <li>RLHF (Reinforcement Learning from Human Feedback): İnsan geri bildirimiyle model davranışının iyileştirilmesi.</li>
+                            <li>Temperature: Modelin yaratıcılık ve rastgelelik seviyesini ayarlayan parametre.</li>
                         </ul>
                     </div>
                 </div>
@@ -282,8 +293,9 @@
                             </div>
                             <h3 class="text-lg font-semibold">Microsoft & OpenAI</h3>
                         </div>
-                        <p class="text-gray-300 text-sm mb-2">GitHub Copilot: Kod tamamlama</p>
-                        <p class="text-gray-300 text-sm">GPT-4: Çok amaçlı LLM</p>
+                        <p class="text-gray-300 text-sm mb-2">GitHub Copilot: Kod tamamlama ve yazma asistanı, otomatik açıklama oluşturma, 100+ programlama dili desteği.</p>
+                        <p class="text-gray-300 text-sm mb-2">GPT-4: 128K token bağlam penceresi, multimodal yetenekler (resim analizi), reasoning becerisi yüksek.</p>
+                        <p class="text-gray-300 text-sm">GPT-4o: Gerçek zamanlı yanıt, sesli konuşma ve görüntü analizi, GPT-4'ten daha hızlı.</p>
                     </div>
                     <div class="card">
                         <div class="flex items-center mb-3">
@@ -292,7 +304,9 @@
                             </div>
                             <h3 class="text-lg font-semibold">Deepseek</h3>
                         </div>
-                        <p class="text-gray-300 text-sm">Çin menşeli, kod üretme yeteneği yüksek</p>
+                        <p class="text-gray-300 text-sm mb-2">Çin menşeli, özellikle kod üretme konusunda uzmanlaşmış modeller.</p>
+                        <p class="text-gray-300 text-sm mb-2">Deepseek Coder: 2.7B-33B parametreli versiyonları, 16K token bağlam penceresi.</p>
+                        <p class="text-gray-300 text-sm">Açık kaynak versiyonları mevcut, özellikle Python ve JavaScript'te güçlü performans.</p>
                     </div>
                     <div class="card">
                         <div class="flex items-center mb-3">
@@ -301,7 +315,9 @@
                             </div>
                             <h3 class="text-lg font-semibold">xAI (Elon Musk)</h3>
                         </div>
-                        <p class="text-gray-300 text-sm">Grok isimli LLM, X (Twitter) ile entegre</p>
+                        <p class="text-gray-300 text-sm mb-2">Grok: 8K bağlam penceresi, gerçek zamanlı internet erişimi, daha az sansür.</p>
+                        <p class="text-gray-300 text-sm mb-2">X platform entegrasyonu, sosyal medya içeriği anlama yeteneği.</p>
+                        <p class="text-gray-300 text-sm">Grok-2: 8B parametreli, matematiksel problem çözme ve kodlama konusunda gelişmiş.</p>
                     </div>
                     <div class="card">
                         <div class="flex items-center mb-3">
@@ -310,7 +326,9 @@
                             </div>
                             <h3 class="text-lg font-semibold">Google Gemini</h3>
                         </div>
-                        <p class="text-gray-300 text-sm">Mobil ve masaüstü dostu modeller</p>
+                        <p class="text-gray-300 text-sm mb-2">Gemini Ultra: Google'ın en güçlü modeli, 32K token bağlam penceresi.</p>
+                        <p class="text-gray-300 text-sm mb-2">Gemini 1.5 Pro: 1M token bağlam penceresi, saatlerce video analiz edebilme.</p>
+                        <p class="text-gray-300 text-sm">Gemini Flash: Hızlı ve efektif model, Google Workspace araçlarıyla entegre.</p>
                     </div>
                     <div class="card">
                         <div class="flex items-center mb-3">
@@ -319,7 +337,9 @@
                             </div>
                             <h3 class="text-lg font-semibold">Anthropic Claude</h3>
                         </div>
-                        <p class="text-gray-300 text-sm">Belge analizi ve büyük bağlam destekli</p>
+                        <p class="text-gray-300 text-sm mb-2">Claude 3 Opus: 200K token bağlam penceresi, detaylı doküman analizi ve yorumlama.</p>
+                        <p class="text-gray-300 text-sm mb-2">Claude 3 Sonnet: Hız ve kalite dengesi, fiyat-performans oranı yüksek.</p>
+                        <p class="text-gray-300 text-sm">Claude 3 Haiku: Hafif, mobil uyumlu, hızlı yanıt süresi, gerçek zamanlı kullanım.</p>
                     </div>
                     <div class="card">
                         <div class="flex items-center mb-3">
@@ -328,8 +348,10 @@
                             </div>
                             <h3 class="text-lg font-semibold">Meta & Mistral</h3>
                         </div>
-                        <p class="text-gray-300 text-sm">LLaMA: Açık kaynak LLM mimarisi</p>
-                        <p class="text-gray-300 text-sm">Mistral: Hafif ama güçlü açık modeller</p>
+                        <p class="text-gray-300 text-sm mb-2">LLaMA: Açık kaynak ekosistem, 7B-70B parametreli versiyonlar, fine-tuning ile özelleştirilebilir.</p>
+                        <p class="text-gray-300 text-sm mb-2">Llama 3: 400B üzerinde token ile eğitilmiş, 8K token bağlam penceresi.</p>
+                        <p class="text-gray-300 text-sm mb-2">Mistral 7B: Daha küçük boyutta SOTA performans, verimli mimari.</p>
+                        <p class="text-gray-300 text-sm">Mixtral 8x7B: Mixture of Experts (MoE) mimarisi, büyük modellere yakın performans.</p>
                     </div>
                 </div>
             </div>
@@ -946,7 +968,7 @@ Lütfen adım adım açıkla ve kodun nasıl çalıştığını anlat.
                         <div class="mt-auto pt-4">
                             <div class="bg-green-900/30 p-3 rounded-lg border border-green-800/50">
                                 <p class="text-sm text-gray-300">
-                                    300+ entegrasyon, API oluşturma ve webhook desteği sunar.
+                                    1000+ entegrasyon, API oluşturma ve webhook desteği sunar.
                                 </p>
                             </div>
                         </div>
