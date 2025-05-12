@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yapay Zeka Kullanımı ve Entegrasyonu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            overflow: hidden;
+        }
+        
+        .slide {
+            display: none;
+            height: 100vh;
+            width: 100vw;
+            padding: 2rem;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        
+        .progress {
+            height: 100%;
+            background: #4f46e5;
+            transition: width 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn {
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        
+        .slide-indicator {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+        
+        .indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .indicator.active {
+            background: #4f46e5;
+            transform: scale(1.3);
+        }
+        
+        .highlight {
+            color: #4f46e5;
+            font-weight: 600;
+        }
+        
+        .interactive-area {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body class="text-gray-100">
+    <div class="slides-container">
+        <!-- Slide 1: Welcome -->
+        <div class="slide active" id="slide-1">
+            <div class="flex flex-col items-center justify-center h-full text-center">
+                <div class="mb-8">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-400">
+                        <path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L13 10h3.8a2 2 0 0 1 1.94 2.5l-1.55 6a2 2 0 0 1-1.94 1.5H8.75a2 2 0 0 1-1.94-1.5l-1.54-6A2 2 0 0 1 7.2 10H11l.25-.07C9.4 9.58 8 7.95 8 6a4 4 0 0 1 4-4z"></path>
+                        <path d="M18 14h-5"></path>
+                        <path d="M18 17h-5"></path>
+                        <path d="M10 14v3"></path>
+                    </svg>
+                </div>
+                <h1 class="text-5xl font-bold mb-4">Yapay Zeka Kullanımı ve Entegrasyonu</h1>
+                <p class="text-xl text-gray-300 mb-8">LLM Odaklı Yaklaşım</p>
+                <div class="flex items-center space-x-4 mb-12">
+                    <div class="flex flex-col items-center">
+                        <div class="w-12 h-12 rounded-full bg-indigo-600 flex items-center justify-center mb-2">
+                            <span class="text-lg font-bold">FK</span>
+                        </div>
+                        <p>Furkan Köykıran</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-12 h-12 rounded-full bg-indigo-600 flex items-center justify-center mb-2">
+                            <span class="text-lg font-bold">OB</span>
+                        </div>
+                        <p>Oğuz Bolaca</p>
+                    </div>
+                </div>
+                <p class="text-gray-400">LLM'leri hayatımıza entegre etmeyi öğrenmek, pratik araçlarla tanışmak ve iyi prompt yazmayı kavramak.</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: What is LLM -->
+        <div class="slide" id="slide-2">
+            <div class="flex flex-col h-full">
+                <h2 class="text-3xl font-bold mb-8 flex items-center">
+                    <span class="text-indigo-400 mr-3">📈</span> LLM Nedir?
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow">
+                    <div class="card flex flex-col">
+                        <h3 class="text-xl font-semibold mb-4">Temel Bilgiler</h3>
+                        <ul class="space-y-3 list-disc pl-5 text-gray-300">
+                            <li><span class="highlight">LLM (Large Language Model):</span> Çok büyük miktarda metin verisiyle eğitilmiş dil modelidir.</li>
+                            <li>10 milyonlarca parametreli yapılar (GPT-4: ~1.8 trilyon parametre)</li>
+                            <li>İnsan dilindeki kalıpları öğrenerek yanıt verir.</li>
+                        </ul>
+                    </div>
+                    <div class="card flex flex-col">
+                        <h3 class="text-xl font-semibold mb-4">Teknik Detaylar</h3>
+                        <ul class="space-y-3 list-disc pl-5 text-gray-300">
+                            <li><span class="highlight">Kullanılan teknikler:</span> Transformer, attention mekanizması, tokenizasyon</li>
+                            <li><span class="highlight">Hallucination</span> problemi: Model, gerçeğe dayanmayan yanıtlar üretebilir.</li>
+                            <li>❗ LLM'ler "anlamaz", sadece istatistiksel tahmin yapar.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <div class="bg-indigo-900/30 p-4 rounded-lg border border-indigo-800/50">
+                        <p class="text-sm italic text-gray-300">
+                            "LLM'ler, milyarlarca metin üzerinde eğitilmiş, insan dilini taklit edebilen yapay zeka sistemleridir. Ancak gerçek anlama yeteneğine sahip değillerdir."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: What can be done with LLMs -->
+        <div class="slide" id="slide-3">
+            <div class="flex flex-col h-full">
+                <h2 class="text-3xl font-bold mb-8 flex items-center">
+                    <span class="text-indigo-400 mr-3">🧹</span> LLM ile Neler Yapılabilir? Neler Yapılamaz?
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow">
+                    <div class="card">
+                        <h3 class="text-xl font-semibold mb-4 text-green-400">Yapılabilir</h3>
+                        <ul class="space-y-2 text-gray-300">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                E-posta yazma veya özetleme
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Kod yazma, hata bulma
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                İçerik üretimi: blog, başlık, açıklama
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Video senaryosu yazmak
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                CV analizi ve geri bildirim
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Chatbot gibi entegrasyon
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Eğitim planı oluşturma
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3 class="text-xl font-semibold mb-4 text-red-400">Yapılamaz</h3>
+                        <ul class="space-y-2 text-gray-300">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-red-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                                Doğruluğu garanti etme
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-red-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                                Güncel olayları yorumlama (bazı modellerde)
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-red-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                                Kendi isteğiyle karar verme
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-red-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                                İnsan gibi bilinçli düşünme
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Model Types -->
+        <div class="slide" id="slide-4">
+            <div class="flex flex-col h-full">
+                <h2 class="text-3xl font-bold mb-8 flex items-center">
+                    <span class="text-indigo-400 mr-3">🧠</span> Model Türleri
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 flex-grow">
+                    <div class="card">
+                        <div class="flex items-center mb-3">
+                            <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center mr-3">
+                                <span class="text-lg font-bold">M</span>
+                            </div>
+                            <h3 class="text-lg font-semibold">Microsoft & OpenAI</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-2">GitHub Copilot: Kod tamamlama</p>
+                        <p class="text-gray-300 text-sm">GPT-4: Çok amaçlı LLM</p>
+                    </div>
+                    <div class="card">
+                        <div class="flex items-center mb-3">
+                            <div class="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center mr-3">
+                                <span class="text-lg font-bold">D</span>
+                            </div>
+                            <h3 class="text-lg font-semibold">Deepseek</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm">Çin menşeli, kod üretme yeteneği yüksek</p>
+                    </div>
+                    <div class="card">
+                        <div class="flex items-center mb-3">
+                            <div class="w-10 h-10 rounded-full bg-gray-600 flex items-center justify-center mr-3">
+                                <span class="text-lg font-bold">X</span>
+                            </div>
+                            <h3 class="text-lg font-semibold">xAI (Elon Musk)</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm">Grok isimli LLM, X (Twitter) ile entegre</p>
+                    </div>
+                    <div class="card">
+                        <div class="flex items-center mb-3">
+                            <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center mr-3">
+                                <span class="text-lg font-bold">G</span>
+                            </div>
+                            <h3 class="text-lg font-semibold">Google Gemini</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm">Mobil ve masaüstü dostu modeller</p>
+                    </div>
+                    <div class="card">
+                        <div class="flex items-center mb-3">
+                            <div class="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center mr-3">
+                                <span class="text-lg font-bold">A</span>
+                            </div>
+                            <h3 class="text-lg font-semibold">Anthropic Claude</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm">Belge analizi ve büyük bağlam destekli</p>
+                    </div>
+                    <div class="card">
+                        <div class="flex items-center mb-3">
+                            <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center mr-3">
+                                <span class="text-lg font-bold">M</span>
+                            </div>
+                            <h3 class="text-lg font-semibold">Meta & Mistral</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm">LLaMA: Açık kaynak LLM mimarisi</p>
+                        <p class="text-gray-300 text-sm">Mistral: Hafif ama güçlü açık modeller</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Free vs Paid Models -->
+        <div class="slide" id="slide-5">
+            <div class="flex flex-col h-full">
+                <h2 class="text-3xl font-bold mb-8 flex items-center">
+                    <span class="text-indigo-400 mr-3">💸</span> Ücretsiz vs Ücretli Modeller
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow">
+                    <div class="card">
+                        <h3 class="text-xl font-semibold mb-4 text-green-400 flex items-center">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Ücretsiz
+                        </h3>
+                        <ul class="space-y-2 text-gray-300">
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                                GPT 3.5 (OpenAI)
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                                Claude Instant (Anthropic)
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                                Gemini 1.5 Flash (Google)
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                                Mistral 7B, Mixtral
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                                Deepseek-Coder
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                                Meta LLaMA 2 Chat (HuggingFace)
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3 class="text-xl font-semibold mb-4 text-yellow-400 flex items-center">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Ücretli
+                        </h3>
+                        <ul class="space-y-2 text-gray-300">
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></span>
+                                GPT-4 Turbo (OpenAI Plus – $20/ay)
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></span>
+                                Claude 3 Opus (Pro plan)
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></span>
+                                Gemini 1.5 Pro (Gemini Advanced – Google One plan)
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></span>
+                                Grok (xAI Premium – X Blue aboneliği içinde)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <div class="bg-yellow-900/30 p-4 rounded-lg border border-yellow-800/50">
+                        <p class="text-sm italic text-gray-300">
+                            <strong>Not:</strong> Bazı modeller ücretsiz sunulur ancak hız, bağlam uzunluğu ve özellik açısından sınırlıdır.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: What is a Prompt -->
+        <div class="slide" id="slide-6">
+            <div class="flex flex-col h-full">
+                <h2 class="text-3xl font-bold mb-8 flex items-center">
+                    <span class="text-indigo-400 mr-3">📖</span> Prompt Nedir?
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow">
+                    <div class="card flex flex-col justify-center">
+                        <h3 class="text-xl font-semibold mb-6">Temel Tanım</h3>
+                        <ul class="space-y-4 text-gray-300">
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 text-indigo-400 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span>Prompt, LLM'lere verdiğimiz metinsel komuttur.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 text-indigo-400 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span>Girdi + bağlam + talep</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 text-indigo-400 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span>Teknik olarak: "token dizisi"</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 text-indigo-400 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span>Prompt mühendisliği: istenen çıktıyı alabilmek için yapının optimize edilmesi</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card flex flex-col">
+                        <h3 class="text-xl font-semibold mb-4">Örnek Prompt</h3>
+                        <div class="bg-gray-800 rounded-lg p-4 flex-grow">
+                            <pre class="text-green-400 whitespace-pre-wrap text-sm">
+"Sen bir yazılım mühendisisin. 
+Python'da bir web scraper yazmanı istiyorum.
+Aşağıdaki web sitesinden fiyat bilgilerini çekecek:
+https://example.com/products
+
+Lütfen adım adım açıkla ve kodun nasıl çalıştığını anlat.
+Çıktıyı CSV formatında kaydetmek istiyorum."</pre>
+                        </div>
+                        <div class="mt-4 bg-gray-800/50 p-3 rounded-lg">
+                            <p class="text-sm text-gray-300">
+                                Bu prompt içerir:
+                                <span class="block mt-2 ml-4">✓ Rol tanımı</span>
+                                <span class="block ml-4">✓ Görev açıklaması</span>
+                                <span class="block ml-4">✓ Bağlam bilgisi</span>
+                                <span class="block ml-4">✓ Çıktı formatı</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: How to Write Good Prompts -->
+        <div class="slide" id="slide-7">
+            <div class="flex flex-col h-full">
+                <h2 class="text-3xl font-bold mb-8 flex items-center">
+                    <span class="text-indigo-400 mr-3">🎭</span> İyi Prompt Nasıl Yazılır?
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow">
+                    <div class="card">
+                        <h3 class="text-xl font-semibold mb-4">İyi prompt'ın 4 altın kuralı</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center mr-3 flex-shrink-0">
+                                    <span class="font-bold">1</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-indigo-300">Rol ver</p>
+                                    <p class="text-sm text-gray-300 mt-1">"Bir avukatsın...", "Bir yazılım mühendisisin..."</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center mr-3 flex-shrink-0">
+                                    <span class="font-bold">2</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-indigo-300">Bağlam ver</p>
+                                    <p class="text-sm text-gray-300 mt-1">"Türkiye'deki girişimciler için..."</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center mr-3 flex-shrink-0">
+                                    <span class="font-bold">3</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-indigo-300">Çıktı biçimi belirt</p>
+                                    <p class="text-sm text-gray-300 mt-1">"Madde madde", "Markdown formatında"</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center mr-3 flex-shrink-0">
+                                    <span class="font-bold">4</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-indigo-300">Kısıt koy</p>
+                                    <p class="text-sm text-gray-300 mt-1">"200 kelimeyi geçmesin"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="text-xl font-semibold mb-4">Örnekler</h3>
+                        <div class="space-y-4">
+                            <div class="bg-gray-800/50 p-3 rounded-lg">
+                                <p class="text-sm text-green-400 font-medium">Örnek 1:</p>
+                                <p class="text-sm text-gray-300 mt-1">"Bir lise öğrencisine LLM'yi 3 maddeyle açıkla."</p>
+                            </div>
+                            <div class="bg-gray-800/50 p-3 rounded-lg">
+                                <p class="text-sm text-green-400 font-medium">Örnek 2:</p>
+                                <p class="text-sm text-gray-300 mt-1">"Sen bir metin editörüsün. Aşağıdaki yazıyı sadeleştir."</p>
+                            </div>
+                            <div class="bg-gray-800/50 p-3 rounded-lg">
+                                <p class="text-sm text-green-400 font-medium">Örnek 3:</p>
+                                <p class="text-sm text-gray-300 mt-1">"Aşağıdaki kodu açıkla ve optimize et."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Good vs Bad Prompts -->
+        <div class="slide" id="slide-8">
+            <div class="flex flex-col h-full">
+                <h2 class="text-3xl font-bold mb-8 flex items-center">
+                    <span class="text-indigo-400 mr-3">🟦</span> Örneklerle İyi-Kötü Prompt Karşılaştırması
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow">
+                    <div class="card">
+                        <h3 class="text-xl font-semibold mb-4 text-red-400">Kötü Promptlar</h3>
+                        <div class="space-y-6">
+                            <div class="bg-red-900/20 p-4 rounded-lg border border-red-900/30">
+                                <p class="text-red-300 font-medium">❌ "ChatGPT nedir?"</p>
+                                <p class="text-sm text-gray-300 mt-2">Sorun: Çok genel, bağlam yok, rol tanımı yok</p>
+                            </div>
+                            <div class="bg-red-900/20 p-4 rounded-lg border border-red-900/30">
+                                <p class="text-red-300 font-medium">❌ "Bana CV hazırla."</p>
+                                <p class="text-sm text-gray-300 mt-2">Sorun: Kişisel bilgi yok, format belirtilmemiş, hedef kitle belirsiz</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="text-xl font-semibold mb-4 text-green-400">İyi Promptlar</h3>
+                        <div class="space-y-6">
+                            <div class="bg-green-900/20 p-4 rounded-lg border border-green-900/30">
+                                <p class="text-green-300 font-medium">✅ "Bir işe yeni başlayacak kişi için, 5 madde halinde ChatGPT'yi anlat."</p>
+                                <p class="text-sm text-gray-300 mt-2">İyileştirme: Hedef kitle belli, format belirli, kısıt var</p>
+                            </div>
+                            <div class="bg-green-900/20 p-4 rounded-lg border border-green-900/30">
+                                <p class="text-green-300 font-medium">✅ "Yeni mezun bir bilgisayar mühendisi için sade, ATS uyumlu İngilizce CV oluştur."</p>
+                                <p class="text-sm text-gray-300 mt-2">İyileştirme: Profil belirli, format ve dil belirtilmiş, özel gereksinim (ATS) eklenmiş</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Interactive Application 1 -->
+        <div class="slide" id="slide-9">
+            <div class="flex flex-col h-full">
+                <h2 class="text-3xl font-bold mb-6 flex items-center">
+                    <span class="text-indigo-400 mr-3">🎯</span> Interaktif Uygulama 1: "Yapay Zeka Modelini Tahmin Et"
+                </h2>
+                <div class="card flex-grow">
+                    <h3 class="text-xl font-semibold mb-4">Hangi AI Modeli Bu Görüntüyü Oluşturdu?</h3>
+                    
+                    <div class="mb-6">
+                        <p class="text-gray-300 mb-4">
+                            Aşağıdaki görsellerin hangi AI modeli tarafından oluşturulduğunu tahmin edin. Görüntüyü görmek için "Görseli Göster" butonuna tıklayın ve sonra tahminlerinizi paylaşın.
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                        <!-- AI Image 1 -->
+                        <div class="bg-indigo-900/20 p-4 rounded-lg border border-indigo-900/30">
+                            <h4 class="font-medium text-indigo-300 mb-2">Görsel #1</h4>
+                            
+                            <div id="image-container-1" class="bg-gray-800 h-48 rounded-lg flex items-center justify-center mb-4 relative overflow-hidden">
+                                <img id="ai-image-1" src="images/xai-image.jpg" alt="AI Tarafından Oluşturulan Görsel" class="hidden max-h-full max-w-full object-contain" />
+                                <div id="image-placeholder-1" class="flex flex-col items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-400 mb-2">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span class="text-gray-400">Görsel gizli</span>
+                                </div>
+                            </div>
+                            
+                            <button id="show-image-1" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm transition-all w-full mb-4">
+                                Görseli Göster
+                            </button>
+                            
+                            <div class="grid grid-cols-2 gap-2">
+                                <button class="model-guess bg-gray-700 hover:bg-gray-600 text-white px-3 py-2 rounded-md text-sm transition-all" data-model="midjourney" data-target="1">MidJourney</button>
+                                <button class="model-guess bg-gray-700 hover:bg-gray-600 text-white px-3 py-2 rounded-md text-sm transition-all" data-model="dalle" data-target="1">DALL-E</button>
+                                <button class="model-guess bg-gray-700 hover:bg-gray-600 text-white px-3 py-2 rounded-md text-sm transition-all" data-model="xai" data-target="1">xAI (Grok)</button>
+                                <button class="model-guess bg-gray-700 hover:bg-gray-600 text-white px-3 py-2 rounded-md text-sm transition-all" data-model="stable" data-target="1">Stable Diffusion</button>
+                            </div>
+                            
+                            <div id="result-1" class="mt-4 hidden">
+                                <div class="p-2 rounded-lg text-center">
+                                    <p class="font-medium"></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- AI Image 2 -->
+                        <div class="bg-indigo-900/20 p-4 rounded-lg border border-indigo-900/30">
+                            <h4 class="font-medium text-indigo-300 mb-2">Görsel #2</h4>
+                            
+                            <div id="image-container-2" class="bg-gray-800 h-48 rounded-lg flex items-center justify-center mb-4 relative overflow-hidden">
+                                <img id="ai-image-2" src="images/midjourney-image.jpg" alt="AI Tarafından Oluşturulan Görsel" class="hidden max-h-full max-w-full object-contain" />
+                                <div id="image-placeholder-2" class="flex flex-col items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-400 mb-2">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span class="text-gray-400">Görsel gizli</span>
+                                </div>
+                            </div>
+                            
+                            <button id="show-image-2" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm transition-all w-full mb-4">
+                                Görseli Göster
+                            </button>
+                            
+                            <div class="grid grid-cols-2 gap-2">
+                                <button class="model-guess bg-gray-700 hover:bg-gray-600 text-white px-3 py-2 rounded-md text-sm transition-all" data-model="midjourney" data-target="2">MidJourney</button>
+                                <button class="model-guess bg-gray-700 hover:bg-gray-600 text-white px-3 py-2 rounded-md text-sm transition-all" data-model="dalle" data-target="2">DALL-E</button>
+                                <button class="model-guess bg-gray-700 hover:bg-gray-600 text-white px-3 py-2 rounded-md text-sm transition-all" data-model="xai" data-target="2">xAI (Grok)</button>
+                                <button class="model-guess bg-gray-700 hover:bg-gray-600 text-white px-3 py-2 rounded-md text-sm transition-all" data-model="stable" data-target="2">Stable Diffusion</button>
+                            </div>
+                            
+                            <div id="result-2" class="mt-4 hidden">
+                                <div class="p-2 rounded-lg text-center">
+                                    <p class="font-medium"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 bg-gray-800/50 p-4 rounded-lg">
+                        <h4 class="font-medium text-indigo-300 mb-2">Görsel AI Modelleri Arasındaki Farklar</h4>
+                        <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
+                            <li><span class="text-indigo-300">MidJourney:</span> Genellikle sanatsal, detaylı ve estetik açıdan çekici görseller üretir.</li>
+                            <li><span class="text-indigo-300">DALL-E:</span> OpenAI'nin modeli, gerçekçi ve yaratıcı görseller üretmekte güçlüdür.</li>
+                            <li><span class="text-indigo-300">xAI (Grok):</span> Elon Musk'ın şirketinin modeli, farklı stil ve kompozisyonlar oluşturabilir. NOT: Genellikle etik olmayan şeylere müsamaha gösteriyor.</li>
+                            <li><span class="text-indigo-300">Stable Diffusion:</span> Açık kaynaklı model, daha geniş stil yelpazesi sunar.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Interactive Application 2 -->
+        <div class="slide" id="slide-10">
+            <div class="flex flex-col h-full">
+                <h2 class="text-3xl font-bold mb-6 flex items-center">
+                    <span class="text-indigo-400 mr-3">✍️</span> Interaktif Uygulama 2: "Prompt Düzenlemesi"
+                </h2>
+                <div class="card flex-grow">
+                    <h3 class="text-xl font-semibold mb-4">Prompt İyileştirme Çalışması</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-red-300 mb-2">Kötü Prompt:</h4>
+                            <div class="bg-red-900/20 p-4 rounded-lg border border-red-900/30 mb-4">
+                                <p class="text-sm text-gray-300" id="bad-prompt">
+                                    "Yapay zeka hakkında bilgi ver."
+                                </p>
+                            </div>
+                            
+                            <h4 class="font-medium text-green-300 mb-2">İyileştirilmiş Prompt:</h4>
+                            <textarea id="improved-prompt" class="w-full h-32 bg-gray-800/70 p-3 rounded-lg text-gray-300 text-sm border border-gray-700 focus:border-indigo-500 focus:outline-none" placeholder="Kötü promptu iyileştirin..."></textarea>
+                            
+                            <button id="check-improvement" class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm transition-all">İyileştirmeyi Kontrol Et</button>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-medium text-indigo-300 mb-2">Değerlendirme:</h4>
+                            <div id="evaluation-result" class="bg-gray-800/70 p-4 rounded-lg border border-gray-700 h-64 overflow-y-auto">
+                                <p class="text-sm text-gray-300">
+                                    İyileştirilmiş promptunuzu yazın ve değerlendirme için "İyileştirmeyi Kontrol Et" butonuna tıklayın.
+                                </p>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <h4 class="font-medium text-indigo-300 mb-2">İpuçları:</h4>
+                                <ul class="list-disc pl-5 text-sm text-gray-300 space-y-1">
+                                    <li>Bir rol tanımlayın</li>
+                                    <li>Hedef kitleyi belirtin</li>
+                                    <li>İstediğiniz çıktı formatını açıkça belirtin</li>
+                                    <li>Uzunluk veya kapsam için kısıtlar ekleyin</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Hugging Face -->
+        <div class="slide" id="slide-11">
+            <div class="flex flex-col h-full">
+                <h2 class="text-3xl font-bold mb-8 flex items-center">
+                    <span class="text-indigo-400 mr-3">🌐</span> Hugging Face Nedir?
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow">
+                    <div class="card flex flex-col">
+                        <h3 class="text-xl font-semibold mb-4">Temel Bilgiler</h3>
+                        <ul class="space-y-3 list-disc pl-5 text-gray-300">
+                            <li><span class="highlight">Yapay zeka modeli</span> barındırma ve paylaşım platformudur.</li>
+                            <li>200.000'den fazla model barındırır (LLM, görsel, ses, kod)</li>
+                            <li><span class="highlight">Spaces</span> özelliği ile uygulama barındırılabilir</li>
+                            <li>Açık kaynak yapay zeka topluluğunun merkezi haline gelmiştir</li>
+                        </ul>
+                        <div class="mt-auto pt-4">
+                            <div class="bg-indigo-900/30 p-3 rounded-lg border border-indigo-800/50">
+                                <p class="text-sm text-gray-300">
+                                    "AI için GitHub" olarak düşünülebilir - herkes model ve veri paylaşabilir.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card flex flex-col">
+                        <h3 class="text-xl font-semibold mb-4">Sunduğu Kütüphaneler</h3>
+                        <ul class="space-y-3 list-disc pl-5 text-gray-300">
+                            <li><span class="highlight">Transformers:</span> Model yükleme, çalıştırma</li>
+                            <li><span class="highlight">Datasets:</span> Veri kümesi yönetimi</li>
+                            <li><span class="highlight">PEFT:</span> Parametre-etkin ince ayar</li>
+                            <li><span class="highlight">Diffusers:</span> Görüntü üretimi</li>
+                        </ul>
+                        <div class="mt-4 flex-grow flex items-center justify-center">
+                            <div class="bg-gray-800 rounded-lg p-3 w-full text-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 120 120" fill="none" stroke="currentColor" class="mx-auto mb-2 text-yellow-400">
+                                    <path d="M60 20V100" stroke-width="8" stroke-linecap="round"/>
+                                    <path d="M40 40V80" stroke-width="8" stroke-linecap="round"/>
+                                    <path d="M80 40V80" stroke-width="8" stroke-linecap="round"/>
+                                    <path d="M20 60H100" stroke-width="8" stroke-linecap="round"/>
+                                </svg>
+                                <p class="text-gray-300 text-sm">Hugging Face Logo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="card">
+                        <h3 class="text-xl font-semibold mb-3">Hugging Face ile Neler Yapabilirsiniz?</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <div class="bg-indigo-900/20 p-3 rounded-lg">
+                                <p class="font-medium text-indigo-300 mb-1">Modelleri Keşfet</p>
+                                <p class="text-sm text-gray-300">Binlerce açık kaynak modeli dene ve karşılaştır</p>
+                            </div>
+                            <div class="bg-indigo-900/20 p-3 rounded-lg">
+                                <p class="font-medium text-indigo-300 mb-1">Model Paylaş</p>
+                                <p class="text-sm text-gray-300">Kendi eğittiğin modelleri toplulukla paylaş</p>
+                            </div>
+                            <div class="bg-indigo-900/20 p-3 rounded-lg">
+                                <p class="font-medium text-indigo-300 mb-1">Uygulama Oluştur</p>
+                                <p class="text-sm text-gray-300">Spaces ile AI uygulamalarını hızlıca deploy et</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: VSCode + GitHub Copilot -->
+        <div class="slide" id="slide-12">
+            <div class="flex flex-col h-full">
+                <h2 class="text-3xl font-bold mb-8 flex items-center">
+                    <span class="text-indigo-400 mr-3">💻</span> VSCode + GitHub Copilot (TAB Mode)
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow">
+                    <div class="card flex flex-col">
+                        <h3 class="text-xl font-semibold mb-4">Temel Özellikler</h3>
+                        <ul class="space-y-3 list-disc pl-5 text-gray-300">
+                            <li>Kod yazarken satırın sonunu tahmin eder</li>
+                            <li>Açıklama yazarsan kod üretir: <code class="bg-gray-800 px-2 py-1 rounded"># bir sayı listesi oluştur</code> gibi</li>
+                            <li>Fonksiyon özetleri, hata bulma yardımcısı</li>
+                            <li>GPT-4 tabanlı, tüm dillerde çalışır</li>
+                            <li><kbd class="bg-gray-700 px-2 py-0.5 rounded text-xs">TAB</kbd> tuşu ile öneriyi kabul edersin</li>
+                        </ul>
+                        <div class="mt-auto pt-4">
+                            <div class="bg-blue-900/30 p-3 rounded-lg border border-blue-800/50">
+                                <p class="text-sm text-gray-300">
+                                    GitHub hesabıyla aylık 10$ veya kurumlar için daha yüksek fiyatlandırma.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="text-xl font-semibold mb-4">Örnek Kullanım</h3>
+                        <div class="bg-gray-900 rounded-lg p-4 font-mono text-sm h-64 overflow-y-auto">
+                            <p class="text-gray-400">// Python'da bir sayı listesi oluşturmak için</p>
+                            <p class="text-green-400"># 1'den 10'a kadar olan sayıların karesini hesapla</p>
+                            <p class="text-blue-300">squares = [<span class="text-yellow-300">x ** 2</span> for x in range(<span class="text-purple-300">1</span>, <span class="text-purple-300">11</span>)]</p>
+                            <p class="text-gray-400 mt-4">// Bir sınıf tanımlamak için</p>
+                            <p class="text-green-400"># Bir kullanıcı sınıfı oluştur</p>
+                            <div class="text-blue-300">
+                                class User:
+                                <div class="pl-4">
+                                    def __init__(self, name, email, age):<br>
+                                    <span class="pl-4">self.name = name</span><br>
+                                    <span class="pl-4">self.email = email</span><br>
+                                    <span class="pl-4">self.age = age</span><br><br>
+                                    
+                                    def is_adult(self):<br>
+                                    <span class="pl-4">return self.age >= 18</span><br><br>
+                                    
+                                    def get_info(self):<br>
+                                    <span class="pl-4">return f"Name: {self.name}, Email: {self.email}, Age: {self.age}"</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="card">
+                        <h3 class="text-xl font-semibold mb-3">Copilot'un Avantajları</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <div class="bg-indigo-900/20 p-3 rounded-lg">
+                                <p class="font-medium text-indigo-300 mb-1">Zaman Tasarrufu</p>
+                                <p class="text-sm text-gray-300">Rutin kod yazımını otomatikleştirir</p>
+                            </div>
+                            <div class="bg-indigo-900/20 p-3 rounded-lg">
+                                <p class="font-medium text-indigo-300 mb-1">Öğrenme Eğrisi</p>
+                                <p class="text-sm text-gray-300">Yeni dil veya kütüphaneleri öğrenmede yardımcı olur</p>
+                            </div>
+                            <div class="bg-indigo-900/20 p-3 rounded-lg">
+                                <p class="font-medium text-indigo-300 mb-1">Verimliliği Artırır</p>
+                                <p class="text-sm text-gray-300">Sık kullanılan kalıpları hızlıca oluşturur</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: RooCode + MCP -->
+        <div class="slide" id="slide-13">
+            <div class="flex flex-col h-full">
+                <h2 class="text-3xl font-bold mb-8 flex items-center">
+                    <span class="text-indigo-400 mr-3">🧑‍💻</span> RooCode + MCP (Full Stack Dev)
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow">
+                    <div class="card flex flex-col">
+                        <h3 class="text-xl font-semibold mb-4">RooCode Nedir?</h3>
+                        <ul class="space-y-3 list-disc pl-5 text-gray-300">
+                            <li>VSCode alternatifi, AI ile bütünleşik bir editör</li>
+                            <li>Prompt kullanarak büyük kod blokları oluşturabilir</li>
+                            <li>Cursor.sh'nin gelişmiş bir rakibi</li>
+                            <li>Kod tamamlama, hata ayıklama, dönüştürme</li>
+                            <li>Kod anlamayı kolaylaştıran özet ve açıklama özellikleri</li>
+                        </ul>
+                        <div class="mt-auto pt-4">
+                            <div class="bg-purple-900/30 p-3 rounded-lg border border-purple-800/50">
+                                <p class="text-sm text-gray-300">
+                                    Ücretsiz ve ücretli planlar mevcut. Claude ve GPT modellerini destekler.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card flex flex-col">
+                        <h3 class="text-xl font-semibold mb-4">MCP (Model Context Protocol) Nedir?</h3>
+                        <ul class="space-y-3 list-disc pl-5 text-gray-300">
+                            <li>Geliştirici + AI arasında ortak bir bağlam sağlar</li>
+                            <li>Projeye özgü rehberlik verir</li>
+                            <li>Görevi tamamlamak için birden çok aracı kullanabilir</li>
+                            <li>Prompt içinde görev dağıtımı yapılabilir</li>
+                            <li>Örnek: "Sen veritabanı uzmanısın, aşağıdaki tabloyu yorumla"</li>
+                        </ul>
+                        <div class="mt-auto pt-4">
+                            <div class="bg-indigo-900/30 p-3 rounded-lg border border-indigo-800/50">
+                                <p class="text-sm text-gray-300">
+                                    MCP, AI'ların çeşitli araçları kullanarak karmaşık görevleri gerçekleştirmesini sağlayan bir protokoldür.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="card">
+                        <h3 class="text-xl font-semibold mb-3">MCP ile Ne Yapabilirsiniz?</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <div class="bg-indigo-900/20 p-3 rounded-lg">
+                                <p class="font-medium text-indigo-300 mb-1">API Geliştirme</p>
+                                <p class="text-sm text-gray-300">"Backend uzmanı olarak bu API endpoint'leri oluştur"</p>
+                            </div>
+                            <div class="bg-indigo-900/20 p-3 rounded-lg">
+                                <p class="font-medium text-indigo-300 mb-1">Kod Refaktörü</p>
+                                <p class="text-sm text-gray-300">"Kod kalitesi uzmanı olarak bu fonksiyonu optimize et"</p>
+                            </div>
+                            <div class="bg-indigo-900/20 p-3 rounded-lg">
+                                <p class="font-medium text-indigo-300 mb-1">UI Tasarımı</p>
+                                <p class="text-sm text-gray-300">"Frontend uzmanı olarak responsive bir form tasarla"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: n8n Kodsuz Otomasyon -->
+        <div class="slide" id="slide-14">
+            <div class="flex flex-col h-full">
+                <h2 class="text-3xl font-bold mb-8 flex items-center">
+                    <span class="text-indigo-400 mr-3">🧩</span> n8n: Kodsuz Otomasyon
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow">
+                    <div class="card flex flex-col">
+                        <h3 class="text-xl font-semibold mb-4">n8n Nedir?</h3>
+                        <ul class="space-y-3 list-disc pl-5 text-gray-300">
+                            <li>Açık kaynaklı otomasyon platformu</li>
+                            <li>Web arayüzü ile sürükle-bırak mantığı</li>
+                            <li>Zapier ve Make.com alternatifi</li>
+                            <li>Self-host veya cloud seçenekleri</li>
+                            <li>Ücretsiz ve açık kaynak</li>
+                        </ul>
+                        <div class="mt-auto pt-4">
+                            <div class="bg-green-900/30 p-3 rounded-lg border border-green-800/50">
+                                <p class="text-sm text-gray-300">
+                                    300+ entegrasyon, API oluşturma ve webhook desteği sunar.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card flex flex-col">
+                        <h3 class="text-xl font-semibold mb-4">Temel Node Türleri</h3>
+                        <ul class="space-y-3 list-disc pl-5 text-gray-300">
+                            <li><span class="highlight">Trigger Nodes:</span> HTTP istekleri, zamanlayıcı, webhook</li>
+                            <li><span class="highlight">API Nodes:</span> OpenAI, HuggingFace, Replicate</li>
+                            <li><span class="highlight">Utility Nodes:</span> Veri dönüşümü, formatlama</li>
+                            <li><span class="highlight">Flow Logic:</span> IF/ELSE, Split, Merge</li>
+                            <li><span class="highlight">Services:</span> Email, SMS, veritabanı</li>
+                        </ul>
+                        <div class="mt-auto">
+                            <div class="h-40 rounded-lg overflow-hidden">
+                                <img src="images/n8n.jpg" alt="n8n workflow example" class="w-full h-full object-cover object-center opacity-70">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="card">
+                        <h3 class="text-xl font-semibold mb-3">Örnek Kullanım Alanları</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+                            <div class="bg-indigo-900/20 p-3 rounded-lg">
+                                <p class="font-medium text-indigo-300 mb-1">Sosyal Medya</p>
+                                <p class="text-sm text-gray-300">İçerikleri otomatik paylaşma ve zamanlanmış gönderiler</p>
+                            </div>
+                            <div class="bg-indigo-900/20 p-3 rounded-lg">
+                                <p class="font-medium text-indigo-300 mb-1">Veri Toplama</p>
+                                <p class="text-sm text-gray-300">API'lerden bilgi çekme ve veritabanına kaydetme</p>
+                            </div>
+                            <div class="bg-indigo-900/20 p-3 rounded-lg">
+                                <p class="font-medium text-indigo-300 mb-1">Bildirimler</p>
+                                <p class="text-sm text-gray-300">Email, Slack veya Telegram üzerinden uyarılar</p>
+                            </div>
+                            <div class="bg-indigo-900/20 p-3 rounded-lg">
+                                <p class="font-medium text-indigo-300 mb-1">AI Entegrasyonu</p>
+                                <p class="text-sm text-gray-300">LLM'leri iş akışlarınıza dahil etme</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: n8n Telegram Botu Yapımı -->
+        <div class="slide" id="slide-15">
+            <div class="flex flex-col h-full">
+                <h2 class="text-3xl font-bold mb-6 flex items-center">
+                    <span class="text-indigo-400 mr-3">🤖</span> n8n'de Telegram Botu Yapımı
+                </h2>
+                <div class="card flex-grow">
+                    <h3 class="text-xl font-semibold mb-4">Adım Adım Bot Oluşturma</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <div class="bg-blue-900/20 p-4 rounded-lg border border-blue-900/30 mb-4">
+                                <h4 class="font-medium text-blue-300 mb-2 flex items-center">
+                                    <div class="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center mr-2 flex-shrink-0">
+                                        <span class="text-sm">1</span>
+                                    </div>
+                                    Telegram Bot Oluşturma
+                                </h4>
+                                <ul class="text-sm text-gray-300 space-y-2 list-disc pl-5">
+                                    <li>BotFather ile konuşarak yeni bot oluştur</li>
+                                    <li>Bot adı ve kullanıcı adı belirle</li>
+                                    <li>API anahtarını (token) kopyala</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-blue-900/20 p-4 rounded-lg border border-blue-900/30 mb-4">
+                                <h4 class="font-medium text-blue-300 mb-2 flex items-center">
+                                    <div class="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center mr-2 flex-shrink-0">
+                                        <span class="text-sm">2</span>
+                                    </div>
+                                    n8n Webhook Kurulumu
+                                </h4>
+                                <ul class="text-sm text-gray-300 space-y-2 list-disc pl-5">
+                                    <li>n8n'de yeni workflow oluştur</li>
+                                    <li>Webhook node ekle ve yapılandır</li>
+                                    <li>Webhook URL'sini kopyala</li>
+                                    <li>Telegram API ile webhook'u ayarla</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="bg-blue-900/20 p-4 rounded-lg border border-blue-900/30 mb-4">
+                                <h4 class="font-medium text-blue-300 mb-2 flex items-center">
+                                    <div class="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center mr-2 flex-shrink-0">
+                                        <span class="text-sm">3</span>
+                                    </div>
+                                    GPT Entegrasyonu
+                                </h4>
+                                <ul class="text-sm text-gray-300 space-y-2 list-disc pl-5">
+                                    <li>OpenAI node ekle</li>
+                                    <li>API anahtarını gir</li>
+                                    <li>Gelen mesajı GPT'ye gönder</li>
+                                    <li>Parametreleri ayarla (model, sıcaklık vb.)</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-blue-900/20 p-4 rounded-lg border border-blue-900/30">
+                                <h4 class="font-medium text-blue-300 mb-2 flex items-center">
+                                    <div class="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center mr-2 flex-shrink-0">
+                                        <span class="text-sm">4</span>
+                                    </div>
+                                    Yanıt Gönderme
+                                </h4>
+                                <ul class="text-sm text-gray-300 space-y-2 list-disc pl-5">
+                                    <li>Telegram node ekle</li>
+                                    <li>Bot token'ını yapılandır</li>
+                                    <li>Cevabı kullanıcıya gönder</li>
+                                    <li>Workflow'u aktifleştir ve test et</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <h4 class="font-medium text-indigo-300 mb-2">Telegram Bot Akış Diyagramı</h4>
+                        <div class="bg-gray-800/70 p-4 rounded-lg border border-gray-700 h-36 flex items-center justify-center">
+                            <div class="flex items-center space-x-4">
+                                <div class="bg-blue-900/50 p-2 rounded-lg">
+                                    <span class="text-blue-300">Telegram Trigger</span>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500">
+                                    <path d="M5 12h14"></path>
+                                    <path d="m12 5 7 7-7 7"></path>
+                                </svg>
+                                <div class="bg-green-900/50 p-2 rounded-lg">
+                                    <span class="text-green-300">Set Variables</span>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500">
+                                    <path d="M5 12h14"></path>
+                                    <path d="m12 5 7 7-7 7"></path>
+                                </svg>
+                                <div class="bg-purple-900/50 p-2 rounded-lg">
+                                    <span class="text-purple-300">OpenAI</span>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500">
+                                    <path d="M5 12h14"></path>
+                                    <path d="m12 5 7 7-7 7"></path>
+                                </svg>
+                                <div class="bg-blue-900/50 p-2 rounded-lg">
+                                    <span class="text-blue-300">Telegram</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 bg-indigo-900/20 p-4 rounded-lg border border-indigo-900/30">
+                        <p class="text-sm italic text-gray-300">
+                            <span class="font-medium text-indigo-300">Demo Not:</span> Bot yanıtlarında temel kısıtlamalar belirlemek için sistem mesajı eklenebilir. Örneğin "Sen yardımcı bir asistansın, kısa ve net cevaplar ver."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16: Kapanış -->
+        <div class="slide" id="slide-16">
+            <div class="flex flex-col h-full">
+                <h2 class="text-3xl font-bold mb-8 flex items-center">
+                    <span class="text-indigo-400 mr-3">👍</span> Kapanış ve Teşekkürler!
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow">
+                    <div class="card flex flex-col">
+                        <h3 class="text-xl font-semibold mb-4">Bu Eğitimde Öğrendiklerimiz</h3>
+                        <ul class="space-y-3 list-disc pl-5 text-gray-300">
+                            <li>LLM nedir? Nasıl çalışır?</li>
+                            <li>LLM'lerle neler yapılabilir, neler yapılamaz?</li>
+                            <li>Güncel model türleri ve sağlayıcılar</li>
+                            <li>İyi bir prompt nasıl yazılır?</li>
+                            <li>GitHub Copilot ve RooCode gibi araçlarla geliştirme</li>
+                            <li>HuggingFace ile açık kaynak modellerin gücü</li>
+                            <li>n8n ile sıfır kodla entegrasyon</li>
+                            <li>Gerçek senaryolarda uygulama</li>
+                        </ul>
+                    </div>
+                    <div class="card flex flex-col justify-center">
+                        <h3 class="text-xl font-semibold mb-6">Kaynaklar</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <svg class="w-5 h-5 text-indigo-400 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                                <span class="text-gray-300"><span class="text-indigo-300">HuggingFace:</span> huggingface.io</span>
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="w-5 h-5 text-indigo-400 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                                <span class="text-gray-300"><span class="text-indigo-300">GitHub Copilot:</span> github.com/features/copilot</span>
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="w-5 h-5 text-indigo-400 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                                <span class="text-gray-300"><span class="text-indigo-300">n8n:</span> n8n.io</span>
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="w-5 h-5 text-indigo-400 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                                <span class="text-gray-300"><span class="text-indigo-300">RooCode:</span> roocode.com</span>
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="w-5 h-5 text-indigo-400 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                                <span class="text-gray-300"><span class="text-indigo-300">Prompt Mühendisliği:</span> learnprompting.org</span>
+                            </div>
+                        </div>
+                        <div class="mt-auto pt-6">
+                            <div class="bg-indigo-900/30 p-4 rounded-lg border border-indigo-800/50">
+                                <p class="text-center text-gray-300">
+                                    <span class="text-xl">🙏</span> Katılımınız için teşekkürler!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="navigation">
+        <div class="flex space-x-3">
+            <button id="prev-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 18l-6-6 6-6"/>
+                </svg>
+            </button>
+            <button id="next-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18l6-6-6-6"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Slide Indicators -->
+    <div class="slide-indicator" id="slide-indicator"></div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress" id="progress"></div>
+    </div>
+
+    <script>
+        // Slide functionality
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const progress = document.getElementById('progress');
+        const slideIndicator = document.getElementById('slide-indicator');
+        
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+        
+        // Create slide indicators
+        for (let i = 0; i < totalSlides; i++) {
+            const indicator = document.createElement('div');
+            indicator.classList.add('indicator');
+            if (i === 0) indicator.classList.add('active');
+            indicator.addEventListener('click', () => goToSlide(i));
+            slideIndicator.appendChild(indicator);
+        }
+        
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                }
+            });
+            
+            // Update progress bar
+            const progressPercentage = ((currentSlide + 1) / totalSlides) * 100;
+            progress.style.width = `${progressPercentage}%`;
+            
+            // Update indicators
+            const indicators = document.querySelectorAll('.indicator');
+            indicators.forEach((indicator, index) => {
+                indicator.classList.remove('active');
+                if (index === currentSlide) {
+                    indicator.classList.add('active');
+                }
+            });
+            
+            // Update button states
+            prevBtn.disabled = currentSlide === 0;
+            prevBtn.style.opacity = currentSlide === 0 ? '0.5' : '1';
+            nextBtn.disabled = currentSlide === totalSlides - 1;
+            nextBtn.style.opacity = currentSlide === totalSlides - 1 ? '0.5' : '1';
+        }
+        
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+        
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlide();
+        }
+        
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+        
+        // AI Image Guessing Game Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show Image buttons
+            const showImage1Btn = document.getElementById('show-image-1');
+            const showImage2Btn = document.getElementById('show-image-2');
+            
+            // Image elements
+            const aiImage1 = document.getElementById('ai-image-1');
+            const aiImage2 = document.getElementById('ai-image-2');
+            
+            // Image placeholders
+            const imagePlaceholder1 = document.getElementById('image-placeholder-1');
+            const imagePlaceholder2 = document.getElementById('image-placeholder-2');
+            
+            // Result containers
+            const result1 = document.getElementById('result-1');
+            const result2 = document.getElementById('result-2');
+            
+            // Correct answers
+            const correctAnswers = {
+                "1": "xai",       // First image is from xAI (Grok)
+                "2": "midjourney" // Second image is from MidJourney
+            };
+            
+            // Show Image handlers
+            showImage1Btn.addEventListener('click', function() {
+                aiImage1.classList.remove('hidden');
+                imagePlaceholder1.classList.add('hidden');
+                this.disabled = true;
+                this.innerText = 'Görsel Gösteriliyor';
+                this.classList.add('bg-indigo-500');
+                this.classList.remove('hover:bg-indigo-700');
+            });
+            
+            showImage2Btn.addEventListener('click', function() {
+                aiImage2.classList.remove('hidden');
+                imagePlaceholder2.classList.add('hidden');
+                this.disabled = true;
+                this.innerText = 'Görsel Gösteriliyor';
+                this.classList.add('bg-indigo-500');
+                this.classList.remove('hover:bg-indigo-700');
+            });
+            
+            // Model guess buttons
+            const modelGuessButtons = document.querySelectorAll('.model-guess');
+            
+            modelGuessButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const model = this.getAttribute('data-model');
+                    const target = this.getAttribute('data-target');
+                    const resultElement = document.getElementById(`result-${target}`);
+                    const resultText = resultElement.querySelector('p');
+                    
+                    // Disable all buttons for this target
+                    document.querySelectorAll(`.model-guess[data-target="${target}"]`).forEach(btn => {
+                        btn.disabled = true;
+                        btn.classList.add('opacity-50');
+                    });
+                    
+                    // Highlight the selected button
+                    this.classList.remove('bg-gray-700');
+                    
+                    // Check if the guess is correct
+                    if (model === correctAnswers[target]) {
+                        this.classList.add('bg-green-600');
+                        resultText.innerHTML = '✅ <span class="text-green-400">Doğru tahmin!</span> Bu görsel gerçekten ' + 
+                                              this.innerText + ' tarafından oluşturulmuştur.';
+                        resultElement.querySelector('div').classList.add('bg-green-900/20', 'border', 'border-green-900/30');
+                    } else {
+                        this.classList.add('bg-red-600');
+                        // Highlight the correct answer
+                        document.querySelector(`.model-guess[data-model="${correctAnswers[target]}"][data-target="${target}"]`)
+                               .classList.add('bg-green-600');
+                               
+                        resultText.innerHTML = '❌ <span class="text-red-400">Yanlış tahmin.</span> Bu görsel aslında ' +
+                                             document.querySelector(`.model-guess[data-model="${correctAnswers[target]}"][data-target="${target}"]`).innerText +
+                                             ' tarafından oluşturulmuştur.';
+                        resultElement.querySelector('div').classList.add('bg-red-900/20', 'border', 'border-red-900/30');
+                    }
+                    
+                    resultElement.classList.remove('hidden');
+                });
+            });
+        });
+        
+        // Prompt improvement evaluation
+        document.getElementById('check-improvement').addEventListener('click', function() {
+            const improvedPrompt = document.getElementById('improved-prompt').value;
+            const evaluationResult = document.getElementById('evaluation-result');
+            
+            if (!improvedPrompt.trim()) {
+                evaluationResult.innerHTML = '<p class="text-red-400">Lütfen iyileştirilmiş bir prompt yazın.</p>';
+                return;
+            }
+            
+            // More comprehensive evaluation logic
+            let score = 0;
+            let feedback = [];
+            let detailedFeedback = [];
+            
+            // Check for role assignment (more detailed patterns)
+            if (improvedPrompt.match(/sen bir|bir? [a-zçğıöşü]+ olarak|uzman[ıi]|profesyonel|mühendis|doktor|öğretmen|eğitmen|danışman|mentor/i)) {
+                score += 25;
+                feedback.push('<span class="text-green-400">✓ Rol tanımı yapılmış</span>');
+                detailedFeedback.push('<span class="text-green-400">✓ Rol tanımı:</span> LLM\'e belirli bir perspektif veya uzmanlık alanı atamışsınız.');
+            } else {
+                feedback.push('<span class="text-red-400">✗ Rol tanımı eksik</span>');
+                detailedFeedback.push('<span class="text-red-400">✗ Rol tanımı:</span> "Sen bir [rol]" veya "[rol] olarak" gibi ifadeler kullanarak LLM\'e bir perspektif kazandırabilirsiniz.');
+            }
+            
+            // Check for context/audience (more patterns)
+            if (improvedPrompt.match(/için|amacıyla|hedef|kitle|seviye|yaş|grup|öğrenci|profesyonel|başlangıç|orta|ileri|giriş/i)) {
+                score += 25;
+                feedback.push('<span class="text-green-400">✓ Bağlam/hedef kitle belirtilmiş</span>');
+                detailedFeedback.push('<span class="text-green-400">✓ Bağlam/hedef kitle:</span> İçeriğin kime hitap edeceğini belirtmişsiniz, bu çıktının daha uygun olmasını sağlar.');
+            } else {
+                feedback.push('<span class="text-red-400">✗ Bağlam/hedef kitle eksik</span>');
+                detailedFeedback.push('<span class="text-red-400">✗ Bağlam/hedef kitle:</span> "X kitlesi için" veya "Y seviyesindeki kişilere yönelik" gibi ifadeler kullanarak hedef kitleyi belirtebilirsiniz.');
+            }
+            
+            // Check for output format (more extensive check)
+            if (improvedPrompt.match(/liste|madde|tablo|markdown|json|yaml|formatında|şeklinde|olarak|özet|başlık|paragraf|adım adım|sıralı/i)) {
+                score += 25;
+                feedback.push('<span class="text-green-400">✓ Çıktı formatı belirtilmiş</span>');
+                detailedFeedback.push('<span class="text-green-400">✓ Çıktı formatı:</span> Sonucun nasıl yapılandırılması gerektiğini belirtmişsiniz, bu yanıtı daha kullanışlı hale getirir.');
+            } else {
+                feedback.push('<span class="text-red-400">✗ Çıktı formatı eksik</span>');
+                detailedFeedback.push('<span class="text-red-400">✗ Çıktı formatı:</span> "Madde madde", "tablo şeklinde" veya "markdown formatında" gibi ifadeler kullanarak çıktının formatını belirtebilirsiniz.');
+            }
+            
+            // Check for constraints (improved pattern matching)
+            if (improvedPrompt.match(/kelime|cümle|paragraf|dakika|kısa|uzun|özlü|kapsamlı|sınır|limit|en fazla|en az|geçme|minimum|maksimum|yaklaşık/i)) {
+                score += 25;
+                feedback.push('<span class="text-green-400">✓ Kısıt eklenmiş</span>');
+                detailedFeedback.push('<span class="text-green-400">✓ Kısıt:</span> Yanıt uzunluğu veya kapsamı için sınır belirlemişsiniz, bu daha kontrollü çıktılar almanızı sağlar.');
+            } else {
+                feedback.push('<span class="text-red-400">✗ Kısıt eksik</span>');
+                detailedFeedback.push('<span class="text-red-400">✗ Kısıt:</span> "En fazla X kelime", "3 paragrafı geçmesin" veya "kısa ve öz olsun" gibi ifadeler kullanarak yanıt uzunluğunu kontrol edebilirsiniz.');
+            }
+            
+            // Bonus points for additional prompt engineering techniques
+            let bonusPoints = 0;
+            let bonusFeedback = [];
+            
+            // Check for examples
+            if (improvedPrompt.match(/örneğin|mesela|şöyle|şu şekilde|gibi olsun/i)) {
+                bonusPoints += 5;
+                bonusFeedback.push('<span class="text-blue-400">+ Örnek kullanımı:</span> Örnekler ekleyerek beklentinizi netleştirmişsiniz.');
+            }
+            
+            // Check for step-by-step instructions
+            if (improvedPrompt.match(/adım adım|önce|sonra|ilk olarak|ardından|son olarak/i)) {
+                bonusPoints += 5;
+                bonusFeedback.push('<span class="text-blue-400">+ Adım adım talimat:</span> Süreç veya sıralama belirtmişsiniz, bu yapılandırılmış yanıtlar almanızı sağlar.');
+            }
+            
+            // Check for persona or tone specification
+            if (improvedPrompt.match(/ton|üslup|tarz|resmi|gayri resmi|akademik|eğlenceli|ciddi|samimi|basit|teknik/i)) {
+                bonusPoints += 5;
+                bonusFeedback.push('<span class="text-blue-400">+ Ton/üslup belirtimi:</span> Yanıtın tonunu veya stilini belirtmişsiniz.');
+            }
+            
+            // Add bonus to total score
+            score += bonusPoints;
+            
+            // Cap the score at 100
+            score = Math.min(score, 100);
+            
+            // Overall evaluation with more detailed feedback
+            let overallFeedback = '';
+            if (score >= 90) {
+                overallFeedback = '<p class="text-green-400 font-bold mt-4">Olağanüstü! 👏 Profesyonel düzeyde bir prompt yazdınız.</p>';
+            } else if (score >= 75) {
+                overallFeedback = '<p class="text-green-400 font-bold mt-4">Harika! 👍 Çok iyi bir prompt yazdınız.</p>';
+            } else if (score >= 50) {
+                overallFeedback = '<p class="text-yellow-400 font-bold mt-4">İyi! ✓ Ancak birkaç iyileştirme daha yapabilirsiniz.</p>';
+            } else if (score >= 25) {
+                overallFeedback = '<p class="text-orange-400 font-bold mt-4">Gelişime açık. 🔄 Yukarıdaki ipuçlarını dikkate alarak geliştirin.</p>';
+            } else {
+                overallFeedback = '<p class="text-red-400 font-bold mt-4">Başlangıç seviyesi. 🔍 Yukarıdaki ipuçlarını dikkate alarak yeniden deneyin.</p>';
+            }
+            
+            // Compare with original prompt
+            const originalPrompt = document.getElementById('bad-prompt').textContent.trim();
+            const improvement = improvedPrompt.length > originalPrompt.length ? 
+                '<p class="text-green-400 mt-2">✓ Orijinal prompttan daha detaylı bir prompt yazdınız.</p>' : 
+                '<p class="text-yellow-400 mt-2">⚠️ Promptunuz orijinal prompttan daha detaylı olabilir.</p>';
+            
+            // Format the evaluation result with a more organized structure
+            evaluationResult.innerHTML = `
+                <div class="mb-4 p-3 bg-indigo-900/30 rounded-lg">
+                    <p class="font-medium text-indigo-300 text-lg">Puan: ${score}/100</p>
+                    ${improvement}
+                </div>
+                
+                <div class="mb-4">
+                    <p class="font-medium text-indigo-300 mb-2">Temel Değerlendirme:</p>
+                    <ul class="space-y-2 mb-3">
+                        ${feedback.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                ${bonusFeedback.length > 0 ? `
+                <div class="mb-4">
+                    <p class="font-medium text-indigo-300 mb-2">Bonus Özellikler:</p>
+                    <ul class="space-y-2 mb-3">
+                        ${bonusFeedback.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+                ` : ''}
+                
+                <div class="mb-4">
+                    <p class="font-medium text-indigo-300 mb-2">Detaylı Geri Bildirim:</p>
+                    <ul class="space-y-3 mb-3">
+                        ${detailedFeedback.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                ${overallFeedback}
+            `;
+        });
+        
+        // Initialize
+        updateSlide();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93eba2eb2671dc33',t:'MTc0NzA3MDk0Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
