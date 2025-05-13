@@ -144,6 +144,18 @@
                     </div>
                 </div>
                 <p class="text-gray-400">LLM'leri hayatımıza entegre etmeyi öğrenmek, pratik araçlarla tanışmak ve iyi prompt yazmayı kavramak.</p>
+                
+                <!-- Credits footer with AI creation notice -->
+                <div class="mt-8 bg-black/50 px-4 py-3 rounded-lg text-center">
+                    <p class="text-sm text-gray-300">
+                        <span class="text-indigo-300">%99 Yapay Zeka</span> ile hazırlanmıştır
+                    </p>
+                    <div class="flex justify-center items-center space-x-6 mt-2">
+                        <a href="https://xrlab.cbu.edu.tr/" class="text-indigo-300 hover:text-indigo-200 text-sm" target="_blank">xrlab.cbu.edu.tr</a>
+                        <span class="text-gray-500">|</span>
+                        <a href="https://furkankoykiran.com.tr" class="text-indigo-300 hover:text-indigo-200 text-sm" target="_blank">furkankoykiran.com.tr</a>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -1131,66 +1143,76 @@ Lütfen adım adım açıkla ve kodun nasıl çalıştığını anlat.
 
         <!-- Slide 16: Kapanış -->
         <div class="slide" id="slide-16">
-            <div class="flex flex-col h-full">
-                <h2 class="text-3xl font-bold mb-8 flex items-center">
-                    <span class="text-indigo-400 mr-3">👍</span> Kapanış ve Teşekkürler!
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow">
-                    <div class="card flex flex-col">
-                        <h3 class="text-xl font-semibold mb-4">Bu Eğitimde Öğrendiklerimiz</h3>
-                        <ul class="space-y-3 list-disc pl-5 text-gray-300">
-                            <li>LLM nedir? Nasıl çalışır?</li>
-                            <li>LLM'lerle neler yapılabilir, neler yapılamaz?</li>
-                            <li>Güncel model türleri ve sağlayıcılar</li>
-                            <li>İyi bir prompt nasıl yazılır?</li>
-                            <li>GitHub Copilot ve RooCode gibi araçlarla geliştirme</li>
-                            <li>HuggingFace ile açık kaynak modellerin gücü</li>
-                            <li>n8n ile sıfır kodla entegrasyon</li>
-                            <li>Gerçek senaryolarda uygulama</li>
-                        </ul>
-                    </div>
-                    <div class="card flex flex-col justify-center">
-                        <h3 class="text-xl font-semibold mb-6">Kaynaklar</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-start">
-                                <svg class="w-5 h-5 text-indigo-400 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                                </svg>
-                                <span class="text-gray-300"><span class="text-indigo-300">HuggingFace:</span> huggingface.io</span>
-                            </div>
-                            <div class="flex items-start">
-                                <svg class="w-5 h-5 text-indigo-400 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                                </svg>
-                                <span class="text-gray-300"><span class="text-indigo-300">GitHub Copilot:</span> github.com/features/copilot</span>
-                            </div>
-                            <div class="flex items-start">
-                                <svg class="w-5 h-5 text-indigo-400 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                                </svg>
-                                <span class="text-gray-300"><span class="text-indigo-300">n8n:</span> n8n.io</span>
-                            </div>
-                            <div class="flex items-start">
-                                <svg class="w-5 h-5 text-indigo-400 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                                </svg>
-                                <span class="text-gray-300"><span class="text-indigo-300">RooCode:</span> roocode.com</span>
-                            </div>
-                            <div class="flex items-start">
-                                <svg class="w-5 h-5 text-indigo-400 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                                </svg>
-                                <span class="text-gray-300"><span class="text-indigo-300">Prompt Mühendisliği:</span> learnprompting.org</span>
-                            </div>
+            <h2 class="text-3xl font-bold mb-8 flex items-center">
+                <span class="text-indigo-400 mr-3">👍</span> Kapanış ve Teşekkürler!
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow">
+                <div class="card flex flex-col">
+                    <h3 class="text-xl font-semibold mb-4">Bu Eğitimde Öğrendiklerimiz</h3>
+                    <ul class="space-y-3 list-disc pl-5 text-gray-300">
+                        <li>LLM nedir? Nasıl çalışır?</li>
+                        <li>LLM'lerle neler yapılabilir, neler yapılamaz?</li>
+                        <li>Güncel model türleri ve sağlayıcılar</li>
+                        <li>İyi bir prompt nasıl yazılır?</li>
+                        <li>GitHub Copilot ve RooCode gibi araçlarla geliştirme</li>
+                        <li>HuggingFace ile açık kaynak modellerin gücü</li>
+                        <li>n8n ile sıfır kodla entegrasyon</li>
+                        <li>Gerçek senaryolarda uygulama</li>
+                    </ul>
+                </div>
+                <div class="card flex flex-col justify-center">
+                    <h3 class="text-xl font-semibold mb-6">Kaynaklar</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <svg class="w-5 h-5 text-indigo-400 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            <span class="text-gray-300"><span class="text-indigo-300">HuggingFace:</span> huggingface.io</span>
                         </div>
-                        <div class="mt-auto pt-6">
-                            <div class="bg-indigo-900/30 p-4 rounded-lg border border-indigo-800/50">
-                                <p class="text-center text-gray-300">
-                                    <span class="text-xl">🙏</span> Katılımınız için teşekkürler!
-                                </p>
-                            </div>
+                        <div class="flex items-start">
+                            <svg class="w-5 h-5 text-indigo-400 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            <span class="text-gray-300"><span class="text-indigo-300">GitHub Copilot:</span> github.com/features/copilot</span>
+                        </div>
+                        <div class="flex items-start">
+                            <svg class="w-5 h-5 text-indigo-400 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            <span class="text-gray-300"><span class="text-indigo-300">n8n:</span> n8n.io</span>
+                        </div>
+                        <div class="flex items-start">
+                            <svg class="w-5 h-5 text-indigo-400 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            <span class="text-gray-300"><span class="text-indigo-300">RooCode:</span> roocode.com</span>
+                        </div>
+                        <div class="flex items-start">
+                            <svg class="w-5 h-5 text-indigo-400 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            <span class="text-gray-300"><span class="text-indigo-300">Prompt Mühendisliği:</span> learnprompting.org</span>
                         </div>
                     </div>
+                    <div class="mt-auto pt-6">
+                        <div class="bg-indigo-900/30 p-4 rounded-lg border border-indigo-800/50">
+                            <p class="text-center text-gray-300">
+                                <span class="text-xl">🙏</span> Katılımınız için teşekkürler!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Credits footer with AI creation notice -->
+            <div class="mt-6 bg-black/50 px-4 py-3 rounded-lg text-center">
+                <p class="text-sm text-gray-300">
+                    <span class="text-indigo-300">%99 Yapay Zeka</span> ile hazırlanmıştır
+                </p>
+                <div class="flex justify-center items-center space-x-6 mt-2">
+                    <a href="https://xrlab.cbu.edu.tr/" class="text-indigo-300 hover:text-indigo-200 text-sm" target="_blank">xrlab.cbu.edu.tr</a>
+                    <span class="text-gray-500">|</span>
+                    <a href="https://furkankoykiran.com.tr" class="text-indigo-300 hover:text-indigo-200 text-sm" target="_blank">furkankoykiran.com.tr</a>
                 </div>
             </div>
         </div>
