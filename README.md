@@ -9,7 +9,7 @@
 
 ## 📖 Hakkında
 
-Çukurova Üniversitesi XR Lab için hazırlanmış 16 slaytlık Türkçe eğitim sunumu. Büyük dil
+Manisa Celal Bayar Üniversitesi MCBU XRLab için hazırlanmış 16 slaytlık Türkçe eğitim sunumu. Büyük dil
 modellerini (LLM) tanıtır, günlük iş akışına nasıl yerleştirileceğini gösterir ve iki
 interaktif alıştırmayla prompt yazımını pratiğe döker.
 
@@ -28,7 +28,7 @@ interaktif alıştırmayla prompt yazımını pratiğe döker.
 
 - **İleri / geri:** ok tuşları veya ekrandaki düğmeler
 - **Slayta git:** alttaki ilerleme göstergesine tıkla
-- Sunum tek bir HTML dosyasıdır ve internet bağlantısı olmadan da açılır.
+- Sunum tek bir HTML dosyasıdır; stiller ve görseller yerelden yüklenir.
 
 ## 🚀 Geliştirme
 
@@ -80,7 +80,7 @@ başına yayınlanabilir tutmak içindir.
 
 - Furkan Köykıran — [furkankoykiran.com.tr](https://furkankoykiran.com.tr)
 - Oğuz Bolaca
-- XR Lab, Çukurova Üniversitesi — [xrlab.cbu.edu.tr](https://xrlab.cbu.edu.tr/)
+- MCBU XRLab, Manisa Celal Bayar Üniversitesi — [xrlab.mcbu.edu.tr](https://xrlab.mcbu.edu.tr/)
 
 ## 📜 Lisans
 

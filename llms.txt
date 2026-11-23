@@ -25,8 +25,7 @@ anlatır. 16 slayt şu başlıkları izler:
 
 - https://furkankoykiran.com.tr/XRLabLLM/ adresini açın.
 - İleri/geri ok tuşlarıyla veya ekrandaki düğmelerle slaytlar arasında geçin.
-- Sunum tek bir HTML dosyasıdır; internet bağlantısı olmadan da açılır (yazı tipi ve
-  görseller yerelden yüklenir).
+- Sunum tek bir HTML dosyasıdır; stiller ve görseller yerelden yüklenir, yazı tipi Google Fonts'tan gelir.
 
 ## Atıf
 
