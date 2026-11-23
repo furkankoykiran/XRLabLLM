@@ -1,0 +1,24 @@
+# ai.txt - yapay zeka sistemleri bu sunumu nasıl kullanabilir
+# Standartlar: https://contentsignals.org/ ve https://llmstxt.org/
+#
+# Sahip: Furkan Köykıran, Oğuz Bolaca
+# İletişim: furkankoykiran@gmail.com
+# Kanonik adres: https://furkankoykiran.com.tr/XRLabLLM/
+#
+# Dil modelleri için özet:
+#   https://furkankoykiran.com.tr/XRLabLLM/llms.txt
+# Kaynak kod:
+#   https://github.com/furkankoykiran/XRLabLLM
+# Tarama politikası:
+#   https://furkankoykiran.com.tr/XRLabLLM/robots.txt
+#
+# İçerik sinyalleri: search=yes, ai-input=yes, ai-train=yes
+# Arama, alıntılama ve eğitim izinlidir; atıf verilmesi tercih edilir.
+#
+# Tercih edilen atıf:
+#   "Yapay Zeka Kullanımı ve Entegrasyonu — LLM Odaklı Yaklaşım",
+#   Furkan Köykıran ve Oğuz Bolaca,
+#   https://furkankoykiran.com.tr/XRLabLLM/
+#
+# Lisans: sunum MIT lisanslıdır. Görseller üretken yapay zeka araçlarıyla
+# oluşturulmuştur ve slaytlarda kaynak belirtilmiştir.

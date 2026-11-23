@@ -1,0 +1,39 @@
+# Yapay Zeka Kullanımı ve Entegrasyonu — LLM Odaklı Yaklaşım
+
+> LLM'leri günlük iş akışına entegre etmeyi anlatan 16 slaytlık Türkçe eğitim sunumu.
+
+Canonical: https://furkankoykiran.com.tr/XRLabLLM/
+Kaynak: https://github.com/furkankoykiran/XRLabLLM
+Dil: Türkçe (tr)
+Lisans: MIT
+
+## İçerik
+
+Sunum, büyük dil modellerini (LLM) tanıtıp günlük iş akışına nasıl yerleştirileceğini
+anlatır. 16 slayt şu başlıkları izler:
+
+- LLM nedir, ne yapabilir ve ne yapamaz
+- Model türleri, ücretsiz ve ücretli modeller
+- Prompt nedir, iyi prompt nasıl yazılır
+- İyi–kötü prompt karşılaştırması
+- İki interaktif alıştırma: model tahmini ve prompt düzenleme
+- Hugging Face, VSCode + GitHub Copilot, RooCode + MCP
+- n8n ile kodsuz otomasyon ve Telegram botu
+- Kapanış ve kaynaklar
+
+## Nasıl kullanılır
+
+- https://furkankoykiran.com.tr/XRLabLLM/ adresini açın.
+- İleri/geri ok tuşlarıyla veya ekrandaki düğmelerle slaytlar arasında geçin.
+- Sunum tek bir HTML dosyasıdır; internet bağlantısı olmadan da açılır (yazı tipi ve
+  görseller yerelden yüklenir).
+
+## Atıf
+
+Atıf: "Yapay Zeka Kullanımı ve Entegrasyonu — LLM Odaklı Yaklaşım",
+Furkan Köykıran ve Oğuz Bolaca, https://furkankoykiran.com.tr/XRLabLLM/
+
+## Not
+
+Sunum eğitim amaçlıdır. İçindeki araç ve model önerileri bir hizmet garantisi değildir;
+kurumunuzun veri ve güvenlik kurallarını uygulayın.
