@@ -1,0 +1,14 @@
+{
+  "name": "xrlabllm-deck",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Yapay Zeka Kullanımı ve Entegrasyonu — LLM odaklı eğitim sunumu",
+  "type": "module",
+  "scripts": {
+    "build": "tailwindcss -i ./src/input.css -o ./css/tailwind.css --minify",
+    "verify": "node scripts/verify-site.mjs"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

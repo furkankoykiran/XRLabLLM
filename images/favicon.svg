@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="XR Lab LLM sunumu">
+  <rect width="64" height="64" rx="14" fill="#1a1a2e"/>
+  <rect x="1" y="1" width="62" height="62" rx="13" fill="none" stroke="#4f46e5" stroke-width="2"/>
+  <path d="M32 12c-3.3 0-6 2.7-6 6 0 2.9 2.1 5.4 4.9 5.9l.1.1h-5.5a3 3 0 0 0-2.9 3.7l2.3 9a3 3 0 0 0 2.9 2.3h8.4a3 3 0 0 0 2.9-2.3l2.3-9a3 3 0 0 0-2.9-3.7H33l.1-.1A6 6 0 0 0 32 12z" fill="#818cf8"/>
+  <path d="M24 46h16M27 51h10" stroke="#a5b4fc" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="47" cy="17" r="3" fill="#22d3ee"/>
+</svg>
